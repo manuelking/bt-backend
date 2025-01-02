@@ -35,7 +35,8 @@ export async function GET(request: Request) {
 
     const collectionRef = adminFirestore.collection('requests')
     const data = await collectionRef.get().then((snapshot) => {
-      const documents: { id: string; data: any }[] = []
+      const documents: { id: string; data: FirebaseFirestore.DocumentData }[] =
+        []
       snapshot.forEach((doc) => {
         const encryptedFields = ['fullName', 'email', 'phoneNumber', 'postcode']
         const docData = cloneDeep(doc.data())
